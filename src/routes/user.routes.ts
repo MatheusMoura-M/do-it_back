@@ -3,13 +3,10 @@ import { bodyValidator, validateTokenMiddleware } from "../middlewares";
 import {
   createUserController,
   deleteUserController,
-  resetPasswordEmailController,
   updateUserController,
   userProfileController,
-  resetPasswordUserController,
   getUserController,
 } from "../controllers/user";
-import { listUserCarsController } from "../controllers/car";
 import {
   userCreateRequestSchema,
   userUpdateRequestSchema,
@@ -19,11 +16,10 @@ const userRoutes = Router();
 
 userRoutes.post(
   "",
-  // bodyValidator(userCreateRequestSchema),
+  bodyValidator(userCreateRequestSchema),
   createUserController
 );
 userRoutes.get("/profile", validateTokenMiddleware, userProfileController);
-userRoutes.get("/cars", validateTokenMiddleware, listUserCarsController);
 
 userRoutes.patch(
   "",
@@ -33,8 +29,6 @@ userRoutes.patch(
 );
 
 userRoutes.delete("", validateTokenMiddleware, deleteUserController);
-userRoutes.post("/reset-password", resetPasswordEmailController);
-userRoutes.patch("/reset-password/:token", resetPasswordUserController);
 
 userRoutes.get("/:id", getUserController);
 

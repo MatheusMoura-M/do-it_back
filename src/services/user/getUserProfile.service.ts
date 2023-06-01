@@ -19,5 +19,4 @@ export const userProfileService = async (
   });
 
   return clientWithoutPassword;
-  
 };

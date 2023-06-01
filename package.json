@@ -23,7 +23,8 @@
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.3.16",
     "uuid": "^9.0.0",
-    "yup": "^1.2.0"
+    "uuid-validate": "^0.0.3",
+    "yup": "0.32.11"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",

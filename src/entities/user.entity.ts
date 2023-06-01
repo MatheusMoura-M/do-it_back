@@ -6,6 +6,8 @@ import {
   BeforeInsert,
   OneToMany,
   JoinColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
 } from "typeorm";
 import { hashSync } from "bcryptjs";
 import { Task } from "./index";
@@ -19,7 +21,7 @@ export class User {
   @Column({ length: 200 })
   name: string;
 
-  @Column({ length: 127 })
+  @Column({ length: 127, unique: true })
   email: string;
 
   @Column()
@@ -29,6 +31,12 @@ export class User {
   @OneToMany(() => Task, (task) => task.user, { cascade: true })
   @JoinColumn()
   tasks: Task[];
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
 
   @BeforeUpdate()
   @BeforeInsert()

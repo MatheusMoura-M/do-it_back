@@ -3,13 +3,13 @@ import jwt from "jsonwebtoken";
 import "dotenv/config";
 import { AppError } from "../../error/appError.error";
 import { userRepo } from "../../utils/repositories";
-import { IUserLogin } from "../../interfaces/user";
+import { IUserLogin, IUserLoginResponse } from "../../interfaces/user";
+import { userLoginResponseSchema } from "../../schemas/session/userLoginResponse.schema";
 
 export const loginService = async ({
   email,
   password,
-}: IUserLogin): Promise<{ token: string }> => {
-  
+}: IUserLogin): Promise<IUserLoginResponse> => {
   const user = await userRepo.findOneBy({
     email: email,
   });
@@ -32,9 +32,15 @@ export const loginService = async ({
     process.env.SECRET_KEY as string,
     {
       subject: String(user.id),
-      expiresIn: process.env.EXPIRES_IN
+      expiresIn: process.env.EXPIRES_IN,
     }
   );
 
-  return { token: token };
+  const returned = { accessToken: token, user: user };
+
+  const returnedValidate = userLoginResponseSchema.validate(returned, {
+    stripUnknown: true,
+  });
+
+  return returnedValidate;
 };

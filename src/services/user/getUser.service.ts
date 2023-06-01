@@ -1,5 +1,4 @@
 import { AppError } from "../../error/appError.error";
-import { iGetUserResponse } from "../../interfaces/user";
 import { getSpecificUserSchema } from "../../schemas/user/getSpecificUser.schema";
 import { userRepo } from "../../utils/repositories";
 
@@ -7,7 +6,7 @@ export const getUserService = async (userId: string) => {
   const getUser = await userRepo.findOne({
     where: { id: userId },
     relations: {
-      cars: true,
+      tasks: true,
     },
   });
 
