@@ -2,7 +2,7 @@ import { iUser } from "../user";
 
 export interface ITaskRequest {
   title: string;
-  description: string;
+  description?: string;
 }
 
 export interface ITaskResponse extends ITaskRequest {
