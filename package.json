@@ -5,6 +5,9 @@
   "repository": "git@github.com:MatheusMoura-M/Do-it_back.git",
   "author": "Matheus M. <matheus150101miranda@gmail.com>",
   "license": "MIT",
+  "engines": {
+    "node": ">=18.12.1 <19"
+  },
   "scripts": {
     "dev": "ts-node-dev src/server.ts",
     "build": "tsc",
